@@ -1,0 +1,19 @@
+      if (ins(lo) && !ins(hi)) {
+        for (let k = 0; k < 20; k++) {
+          const mid = (lo + hi) / 2;
+          if (ins(mid)) lo = mid; else hi = mid;
+        }
+        const p = q.clone().addScaledVector(n, (lo + hi) / 2);
+        const at = this.locate(p);
+        return { p, s: at.s, phi: at.phi };
+      }
+    }
+    const pr = this.project(q);
+    return { p: this.surface(pr.s, pr.phi), s: pr.s, phi: pr.phi };
+  }
+  /** object-space hinge position */
+  hingeXY() {
+    const p = this.local(this.hinge.s, this.hinge.y, 0);
+    return new THREE.Vector2(p.x, p.y);
+  }
+}
